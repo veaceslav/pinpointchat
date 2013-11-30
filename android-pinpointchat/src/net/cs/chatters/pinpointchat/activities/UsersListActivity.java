@@ -107,6 +107,11 @@ public class UsersListActivity extends Activity {
                 return true;
             case R.id.refreshuserslistbutton:
                 refreshUsersList();
+                return true;
+            case R.id.mapoption:
+            	Intent intent = new Intent(this, MapActivity.class);
+            	startActivity(intent);
+            	return true;
             default: return false;
         }
     }
