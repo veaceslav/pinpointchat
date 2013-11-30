@@ -71,6 +71,7 @@ public class MainActivity extends Activity {
         EditText user_field = (EditText) findViewById(R.id.user_field);
         String desiredUsername = user_field.getText().toString();
 
+        /** TODO:Fix this
         int check_availability_result = communicator.check_username_availability(desiredUsername);
 
         if (check_availability_result == USER_TAKEN) {
@@ -82,9 +83,11 @@ public class MainActivity extends Activity {
 //            showAlertDialog("Sorry. The application had some communication errors.");
 //            finish();
         } else {
+
+        	*/
             username = desiredUsername;
             startSession();
-        }
+       // }
     }
 
     @Override

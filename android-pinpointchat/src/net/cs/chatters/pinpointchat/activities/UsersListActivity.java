@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import net.cs.chatters.pinpointchat.models.Utils;
 import net.cs.chatters.pinpointchat.net.Communicator;
 import net.cs.chatters.pinpointchat.net.UserPositionUpdater;
@@ -23,6 +22,8 @@ import net.cs.chatters.pinpointchat.R;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.google.android.gms.maps.model.LatLng;
+
 
 public class UsersListActivity extends Activity {
 
@@ -32,6 +33,8 @@ public class UsersListActivity extends Activity {
     ListView myListView ;
     protected Communicator communicator = new Communicator(this);
     private UserPositionUpdater userPositionUpdater;
+    UserData owner;
+    ArrayList<UserData> usersList;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -110,6 +113,8 @@ public class UsersListActivity extends Activity {
                 return true;
             case R.id.mapoption:
             	Intent intent = new Intent(this, MapActivity.class);
+            	intent.putExtra("usersList", usersList);
+            	intent.putExtra("owner", owner);
             	startActivity(intent);
             	return true;
             default: return false;
@@ -148,15 +153,28 @@ public class UsersListActivity extends Activity {
     private void refreshUsersList(){
         userPositionUpdater.updateNow();
     //TODO: uncomment
-    //ArrayList<UserData> usersList = communicator.getUsers(new UserData(Utils.username).getName());
+    // userList.clear();
+    //usersList = communicator.getUsers(new UserData(Utils.username).getName());
 
 
         //~~~~~~~ stub ~~~~~~//
-        ArrayList<UserData> usersList = new ArrayList<UserData>();
+        owner = new UserData();
+        owner.setName("Eu");
+        owner.lat = 44.43;
+        owner.lng = 26.10;
+        
+        usersList = new ArrayList<UserData>();
         UserData ud = new UserData();
         ud.setName("Daniela");
+        ud.lat = 44.4340;
+        ud.lng = 26.1013;
         usersList.add(ud);
 
+        UserData ud2 = new UserData();
+        ud2.setName("Veaceslav");
+        ud2.lat = 44.4320;
+        ud2.lng = 26.1041;
+        usersList.add(ud2);
         usersListAdapter.changeUsersList(usersList);
     }
 

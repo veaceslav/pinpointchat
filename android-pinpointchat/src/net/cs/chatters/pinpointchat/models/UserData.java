@@ -1,9 +1,15 @@
 package net.cs.chatters.pinpointchat.models;
 
-public class UserData {
-    private String name;
+import java.io.Serializable;
+
+public class UserData implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private String name;
     private int distanceFromUser;
     private String regid;
+    public  double   lat;
+    public  double 	lng;
 
     public String getRegid(){
         return regid;
@@ -36,4 +42,5 @@ public class UserData {
     public void setDistanceFromUser(int str) {
         distanceFromUser = str;
     }
+    
 }
