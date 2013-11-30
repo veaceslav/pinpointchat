@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Single menu item 
+         Set id, icon and Title for each menu item
+    -->
+    <item android:id="@+id/logoutbutton"
+          android:title="LogOut" />
+
+    <item android:id="@+id/incognitobutton"
+          android:title="Poker Face" />
+
+    <item android:id="@+id/updatepositionbutton"
+          android:title="Update position" />
+
+    <item android:id="@+id/refreshuserslistbutton"
+          android:title="Refresh" />
+</menu>

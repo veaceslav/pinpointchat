@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF">
+    <ImageView
+            android:layout_height="70dp"
+            android:layout_width ="70dp"
+            android:id="@+id/imageView"
+            android:background="@drawable/personal_color_shape"
+            />
+
+    <TextView
+            android:layout_height="wrap_content"
+            android:layout_width ="wrap_content"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toLeftOf="@+id/notification"
+            android:id="@+id/nameView"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:onClick="Selected"
+            />
+    <ImageView
+            android:id="@+id/notification"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/notification"
+            android:layout_height="70dp"
+            android:layout_width ="60dp"
+            />
+    <TextView
+            android:id="@+id/distanceView"
+            android:layout_height="wrap_content"
+            android:layout_width ="wrap_content"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toLeftOf="@+id/notification"
+            android:layout_below ="@id/nameView"
+            android:textColor="#B8B8B8"
+            android:textSize="12sp"
+            android:layout_alignBaseline="@id/imageView"
+            android:gravity="center"
+            android:typeface="monospace"
+            />
+
+</RelativeLayout>
