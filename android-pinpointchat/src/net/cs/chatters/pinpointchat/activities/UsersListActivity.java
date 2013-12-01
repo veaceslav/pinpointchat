@@ -43,8 +43,8 @@ public class UsersListActivity extends Activity {
         setContentView(R.layout.userslistlayout);
 
         userPositionUpdater = new UserPositionUpdater((LocationManager) getSystemService(Context.LOCATION_SERVICE));
-        userPositionUpdater.execute();
-
+        userPositionUpdater.updateNow((LocationManager) getSystemService(Context.LOCATION_SERVICE));
+        
         usersListAdapter = new CustomUserImageList(this,new ArrayList<UserData>());
 
         myListView = (ListView) findViewById(R.id.listView);
@@ -83,8 +83,8 @@ public class UsersListActivity extends Activity {
 
     public void onDestroy(){
         super.onDestroy();
-        userPositionUpdater.setOffline();
-        userPositionUpdater.cancel(true);
+        	userPositionUpdater.setOffline();
+        	userPositionUpdater.cancel(true);
     }
 
     public boolean onCreateOptionsMenu(Menu menu)
@@ -106,7 +106,7 @@ public class UsersListActivity extends Activity {
                 LogOut();
                 return true;
             case R.id.updatepositionbutton:
-                userPositionUpdater.updateNow();
+            	userPositionUpdater.updateNow((LocationManager) getSystemService(Context.LOCATION_SERVICE));
                 return true;
             case R.id.refreshuserslistbutton:
                 refreshUsersList();
@@ -151,14 +151,13 @@ public class UsersListActivity extends Activity {
     }
 
     private void refreshUsersList(){
-        userPositionUpdater.updateNow();
+    	userPositionUpdater.updateNow((LocationManager) getSystemService(Context.LOCATION_SERVICE));
     //TODO: uncomment
     // userList.clear();
-    //usersList = communicator.getUsers(new UserData(Utils.username).getName());
-
+        usersList = communicator.getUsers(Utils.username); 
 
         //~~~~~~~ stub ~~~~~~//
-        owner = new UserData();
+/*        owner = new UserData();
         owner.setName("Eu");
         owner.lat = 44.43;
         owner.lng = 26.10;
@@ -174,8 +173,9 @@ public class UsersListActivity extends Activity {
         ud2.setName("Veaceslav");
         ud2.lat = 44.4320;
         ud2.lng = 26.1041;
-        usersList.add(ud2);
+        usersList.add(ud2);*/
         usersListAdapter.changeUsersList(usersList);
+
     }
 
 }

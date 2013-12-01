@@ -71,7 +71,6 @@ public class MainActivity extends Activity {
         EditText user_field = (EditText) findViewById(R.id.user_field);
         String desiredUsername = user_field.getText().toString();
 
-        /** TODO:Fix this
         int check_availability_result = communicator.check_username_availability(desiredUsername);
 
         if (check_availability_result == USER_TAKEN) {
@@ -79,15 +78,13 @@ public class MainActivity extends Activity {
         } else if (check_availability_result == EMPTY_FIELD) {
             showAlertDialog("Please insert an username");
             //todo: uncomment
-//        } else if (check_availability_result == INTERNAL_PROBLEM) {
-//            showAlertDialog("Sorry. The application had some communication errors.");
-//            finish();
+        } else if (check_availability_result == INTERNAL_PROBLEM) {
+            showAlertDialog("Sorry. The application had some communication errors.");
+            finish();
         } else {
-
-        	*/
             username = desiredUsername;
             startSession();
-       // }
+        }
     }
 
     @Override

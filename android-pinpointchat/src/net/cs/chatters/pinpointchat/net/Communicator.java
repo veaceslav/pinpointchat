@@ -267,7 +267,6 @@ class UserFetcher extends AsyncTask<String, Void, ArrayList<UserData>> {
             if (entity != null) {
 
                 String jsonString = EntityUtils.toString(entity);
-
                 JSONObject responseData = new JSONObject(jsonString);
                 JSONArray ResultsArray = responseData.getJSONArray("results");
                 for (int i = 0; i < ResultsArray.length(); i++) {

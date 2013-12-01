@@ -8,14 +8,14 @@ public class Utils {
 
     public final static String USERNAME = "net.mready.chatty.USERNAME";
     public final static String ACTION_NEW_MESSAGE = "net.mready.chatty.NEW_MESSAGE";
-    public static final String ServerURL = "http://10.0.2.2:8080";
+    public static final String ServerURL = "http://192.168.1.147:8080";
     public final static String SENDER_ID = "520086472451";
     public final static String LOGGED_IN = "net.mready.chatty. LOGGED_IN";
     public final static String INTERLOCUTOR = "net.mready.chatty.INTERLOCUTOR";
     public final static String SharedPrefs = "net.mready.chatty.SHARED_PREFS";
     public static final int OK = 200;
     public static final int numberOfDefinedColors = 5;
-    public static final int userPositionUpdaterDELAY = 1000 * 60 * 5;// 1000 * 60 * numarul de minute
+    public static final int userPositionUpdaterDELAY = 1;//1000 * 60 * 5;// 1000 * 60 * numarul de minute // VictorP
     public static final int Not_Acceptable = 406;
     public static final long refreshUsersList = 1000 * 20; // 1000 * 60 *  numarul de minute
     public static long timeOfLastReceivedMessage = 0;

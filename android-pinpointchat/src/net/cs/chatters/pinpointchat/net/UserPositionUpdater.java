@@ -23,8 +23,8 @@ public class UserPositionUpdater extends AsyncTask<String, Void, String> {
         locationManager = locationmanager;
     }
 
-    public void updateNow(){
-       // updatePosition(getGPS());
+    public void updateNow(LocationManager _locationmanager){
+    	new UserPositionUpdater(_locationmanager).execute();	
     }
 
     public void setOffline(){
@@ -33,43 +33,41 @@ public class UserPositionUpdater extends AsyncTask<String, Void, String> {
     }
 
     public String doInBackground(String ... params){
-        while(true){
+        try{
+            double [] coord = getGPS();
+            String uri = Utils.ServerURL + "/updatelocation"+ "?username=" + Utils.username +
+                    "&latitude=" + Double.toString(coord[0]) + "&longitude=" +
+                    Double.toString(coord[1]);
 
-            try{
-                double [] coord = getGPS();
-                String uri = Utils.ServerURL + "/updatelocation"+ "?username=" + Utils.username +
-                        "&latitude=" + Double.toString(coord[0]) + "&longitude=" +
-                        Double.toString(coord[1]);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(uri);
 
-                HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost(uri);
-
-                try {
-                    httpClient.execute(httpPost);
-                }catch (UnsupportedEncodingException e) {
-                    Log.e("UnsupportedEncodingException", e.getMessage());
-                    e.printStackTrace();
-
-                } catch (ClientProtocolException e) {
-                    Log.e("ClientProtocolException", e.getMessage());
-                    e.printStackTrace();
-
-                } catch (IOException e) {
-                    Log.e("IOException", e.getMessage());
-                    e.printStackTrace();
-
-                }
-                Thread.sleep(Utils.userPositionUpdaterDELAY);
-            }catch (InterruptedException e) {
-                // TODO Auto-generated catch block
+            try {
+                httpClient.execute(httpPost);
+            }catch (UnsupportedEncodingException e) {
+                Log.e("UnsupportedEncodingException", e.getMessage());
                 e.printStackTrace();
-            }
 
-            if(isCancelled()){
-                return "canceled";
+            } catch (ClientProtocolException e) {
+                Log.e("ClientProtocolException", e.getMessage());
+                e.printStackTrace();
+
+            } catch (IOException e) {
+                Log.e("IOException", e.getMessage());
+                e.printStackTrace();
+
             }
+            Thread.sleep(Utils.userPositionUpdaterDELAY);
+        }catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
+/*            if(isCancelled()){
+                return "canceled";
+            }*/
+
+        return null;
     }
 
 
