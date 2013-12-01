@@ -39,7 +39,10 @@ public class CustomUserImageList extends BaseAdapter {
 
     public void changeUsersList(ArrayList<UserData> userslist){
         usersList = userslist;
-        this.notifyDataSetChanged();
+        if (usersList != null )
+        {
+        	this.notifyDataSetChanged();
+        }
     }
 
     public int getCount() {
