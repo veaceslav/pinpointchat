@@ -1,10 +1,7 @@
 package net.cs.chatters.pinpointchat.net;
 
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.AsyncTask;
-import android.util.Log;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import net.cs.chatters.pinpointchat.models.Utils;
 
@@ -13,18 +10,22 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.AsyncTask;
+import android.util.Log;
 
 public class UserPositionUpdater extends AsyncTask<String, Void, String> {
 
     private LocationManager locationManager;
+
     public UserPositionUpdater (LocationManager locationmanager){
         locationManager = locationmanager;
     }
 
     public void updateNow(LocationManager _locationmanager){
-    	new UserPositionUpdater(_locationmanager).execute();	
+    	new UserPositionUpdater(_locationmanager).execute();
     }
 
     public void setOffline(){
@@ -35,6 +36,8 @@ public class UserPositionUpdater extends AsyncTask<String, Void, String> {
     public String doInBackground(String ... params){
         try{
             double [] coord = getGPS();
+            Utils.UserLat = coord[0];
+            Utils.UserLng = coord[1];
             String uri = Utils.ServerURL + "/updatelocation"+ "?username=" + Utils.username +
                     "&latitude=" + Double.toString(coord[0]) + "&longitude=" +
                     Double.toString(coord[1]);

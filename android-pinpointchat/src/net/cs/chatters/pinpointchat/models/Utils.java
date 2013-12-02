@@ -22,6 +22,8 @@ public class Utils {
 
     public static String username = "";
     public static ArrayList messages = new ArrayList();
+    public static double UserLat = 0;
+    public static double UserLng = 0;
 
     //used to show a notifier on the user list that a message has been received
     public static HashMap<String, String> UnreadMessages;

@@ -30,7 +30,6 @@ public class UsersListActivity extends Activity {
     ListView myListView ;
     protected Communicator communicator = new Communicator(this);
     private UserPositionUpdater userPositionUpdater;
-    UserData owner;
     ArrayList<UserData> usersList;
 
 
@@ -46,10 +45,7 @@ public class UsersListActivity extends Activity {
 
         myListView = (ListView) findViewById(R.id.listView);
         myListView.setAdapter(usersListAdapter);
-        owner = new UserData();
-        owner.setName("Eu");
-        owner.lat = 44.43;
-        owner.lng = 26.10;
+
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             public void onItemClick(AdapterView<?> parent, View v, int position, long id){
@@ -114,7 +110,6 @@ public class UsersListActivity extends Activity {
             case R.id.mapoption:
             	Intent intent = new Intent(this, MapActivity.class);
             	intent.putExtra("usersList", usersList);
-            	intent.putExtra("owner", owner);
             	startActivity(intent);
             	return true;
             default: return false;
