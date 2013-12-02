@@ -1,10 +1,11 @@
 package net.cs.chatters.pinpointchat.net;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-
-import com.google.android.gcm.GCMRegistrar;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import net.cs.chatters.pinpointchat.activities.MainActivity;
 import net.cs.chatters.pinpointchat.database.MessagesDatabase;
@@ -23,12 +24,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.android.gcm.GCMRegistrar;
 
 
 public class Communicator {
@@ -274,6 +274,8 @@ class UserFetcher extends AsyncTask<String, Void, ArrayList<UserData>> {
                         UserData tempUser = new UserData();
                         tempUser.setName(ResultsArray.getJSONObject(i).getString("username"));
                         tempUser.setDistanceFromUser(ResultsArray.getJSONObject(i).getInt("distance"));
+                        tempUser.lat = ResultsArray.getJSONObject(i).getDouble("lat");
+                        tempUser.lng = ResultsArray.getJSONObject(i).getDouble("lng");
 
                         //if(!tempUser.getName().equals(Utils.username)){
                             Users.add(tempUser);

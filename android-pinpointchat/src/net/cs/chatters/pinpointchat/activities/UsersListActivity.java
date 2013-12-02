@@ -1,5 +1,13 @@
 package net.cs.chatters.pinpointchat.activities;
 
+import java.util.ArrayList;
+
+import net.cs.chatters.pinpointchat.R;
+import net.cs.chatters.pinpointchat.models.UserData;
+import net.cs.chatters.pinpointchat.models.Utils;
+import net.cs.chatters.pinpointchat.net.Communicator;
+import net.cs.chatters.pinpointchat.net.UserPositionUpdater;
+import net.cs.chatters.pinpointchat.usercontrols.CustomUserImageList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,17 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import net.cs.chatters.pinpointchat.models.Utils;
-import net.cs.chatters.pinpointchat.net.Communicator;
-import net.cs.chatters.pinpointchat.net.UserPositionUpdater;
-import net.cs.chatters.pinpointchat.usercontrols.CustomUserImageList;
-import net.cs.chatters.pinpointchat.models.UserData;
-import net.cs.chatters.pinpointchat.R;
-
-import java.util.ArrayList;
-import java.util.Set;
-
-import com.google.android.gms.maps.model.LatLng;
 
 
 public class UsersListActivity extends Activity {
@@ -44,12 +41,15 @@ public class UsersListActivity extends Activity {
 
         userPositionUpdater = new UserPositionUpdater((LocationManager) getSystemService(Context.LOCATION_SERVICE));
         userPositionUpdater.updateNow((LocationManager) getSystemService(Context.LOCATION_SERVICE));
-        
+
         usersListAdapter = new CustomUserImageList(this,new ArrayList<UserData>());
 
         myListView = (ListView) findViewById(R.id.listView);
         myListView.setAdapter(usersListAdapter);
-
+        owner = new UserData();
+        owner.setName("Eu");
+        owner.lat = 44.43;
+        owner.lng = 26.10;
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             public void onItemClick(AdapterView<?> parent, View v, int position, long id){
@@ -152,28 +152,7 @@ public class UsersListActivity extends Activity {
 
     private void refreshUsersList(){
     	userPositionUpdater.updateNow((LocationManager) getSystemService(Context.LOCATION_SERVICE));
-    //TODO: uncomment
-    // userList.clear();
-        usersList = communicator.getUsers(Utils.username); 
-
-        //~~~~~~~ stub ~~~~~~//
-/*        owner = new UserData();
-        owner.setName("Eu");
-        owner.lat = 44.43;
-        owner.lng = 26.10;
-        
-        usersList = new ArrayList<UserData>();
-        UserData ud = new UserData();
-        ud.setName("Daniela");
-        ud.lat = 44.4340;
-        ud.lng = 26.1013;
-        usersList.add(ud);
-
-        UserData ud2 = new UserData();
-        ud2.setName("Veaceslav");
-        ud2.lat = 44.4320;
-        ud2.lng = 26.1041;
-        usersList.add(ud2);*/
+        usersList = communicator.getUsers(Utils.username);
         usersListAdapter.changeUsersList(usersList);
 
     }

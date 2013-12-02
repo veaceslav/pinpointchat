@@ -106,7 +106,7 @@ class SignIn(webapp2.RequestHandler):
         regid = self.request.get('regid')
         query = ("username: " + username)
         user_in_DB = userIndex.search(query)
-        
+
         for usertemp in user_in_DB:
             return self.error(406) #406 = not accepted
 
@@ -130,20 +130,21 @@ class GetUsers(webapp2.RequestHandler):
 
     def post(self):
         username = self.request.get('username',DEFAULT_USER)
-        
+
         query = ("username: " + username)
         users_query = userIndex.search(query)
-        
+
         for MainUser in users_query:
             query = "" #"distance(GeoPoint, geopoint(-33.857, 151.215)) < 4500"
             users = userIndex.search(query)
             c2 = [MainUser.fields[2].value.latitude,MainUser.fields[2].value.longitude]
-            
+
             self.response.write ('{"results": [')
             for user in users: #am format manual JSONul
                 c1 = [user.fields[2].value.latitude,user.fields[2].value.longitude]
-                distance = haversine(c1, c2) * 1000 
-                self.response.write("{ \"username\": \"%s\", \"distance\": \"%s\"}," %(user.fields[0].value, distance))
+                distance = haversine(c1, c2) * 1000
+                self.response.write("{ \"username\": \"%s\", \"distance\": \"%s\"," %(user.fields[0].value, distance))
+                self.response.write(" \"lat\": \"%s\", \"lng\": \"%s\" }," %(c1[0], c1[1]))
             self.response.write(']}')
 
         print self.response
@@ -154,7 +155,7 @@ class UpdateLocation(webapp2.RequestHandler):
         username = self.request.get('username',DEFAULT_USER)
         latitude = (float)(self.request.get('latitude',DEFAULT_VALUE))
         longitude = (float)(self.request.get('longitude',DEFAULT_VALUE))
-        
+
         query = ("username: " + username)
         users_query = userIndex.search(query)
 

@@ -8,7 +8,7 @@ public class Utils {
 
     public final static String USERNAME = "net.mready.chatty.USERNAME";
     public final static String ACTION_NEW_MESSAGE = "net.mready.chatty.NEW_MESSAGE";
-    public static final String ServerURL = "http://192.168.1.147:8080";
+    public static final String ServerURL = "http://10.42.0.1:8080";
     public final static String SENDER_ID = "520086472451";
     public final static String LOGGED_IN = "net.mready.chatty. LOGGED_IN";
     public final static String INTERLOCUTOR = "net.mready.chatty.INTERLOCUTOR";
