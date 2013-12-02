@@ -269,9 +269,12 @@ class UserFetcher extends AsyncTask<String, Void, ArrayList<UserData>> {
                 String jsonString = EntityUtils.toString(entity);
                 JSONObject responseData = new JSONObject(jsonString);
                 JSONArray ResultsArray = responseData.getJSONArray("results");
-                for (int i = 0; i < ResultsArray.length(); i++) {
+                /** primul sunt mereu eu, si ultimul este un element vid care arunca exceptii **/
+                for (int i = 1; i < ResultsArray.length()-1; i++) {
                     try {
                         UserData tempUser = new UserData();
+                        if(ResultsArray.getJSONObject(i).getString("username") == Utils.username)
+                        	continue;
                         tempUser.setName(ResultsArray.getJSONObject(i).getString("username"));
                         tempUser.setDistanceFromUser(ResultsArray.getJSONObject(i).getInt("distance"));
                         tempUser.lat = ResultsArray.getJSONObject(i).getDouble("lat");

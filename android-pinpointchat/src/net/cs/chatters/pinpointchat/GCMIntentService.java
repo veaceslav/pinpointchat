@@ -1,11 +1,9 @@
 package net.cs.chatters.pinpointchat;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-
-import com.google.android.gcm.GCMBaseIntentService;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import net.cs.chatters.pinpointchat.database.MessagesDatabase;
 import net.cs.chatters.pinpointchat.models.Message;
@@ -15,9 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import com.google.android.gcm.GCMBaseIntentService;
 
 
 /**
@@ -78,9 +78,10 @@ public class GCMIntentService extends GCMBaseIntentService{
         for (int i = 0; i < msgList.size(); i++){
             Message msg = msgList.get(i);
             Log.i("GCM prev received", ""+Utils.messageNoReceivedFromUser.get(msg.getSender()));
-
             Log.i("GCM received number", ""+msg.msgNo);
 
+            if(Utils.messageNoReceivedFromUser.get(msg.getSender()) == null)
+            	continue;
 
             //TODO: null pointer aici cand se scrie un msg
             if(msg.msgNo==Utils.messageNoReceivedFromUser.get(msg.getSender())+1){
