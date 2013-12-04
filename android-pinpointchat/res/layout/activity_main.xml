@@ -9,46 +9,94 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/logo_button"
-        android:layout_width="220dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/logo" />
+    <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:orientation="vertical"
+	    android:layout_height="fill_parent">
+    	<LinearLayout 
+    		android:layout_width="fill_parent"
+    		android:layout_height="0dip"
+    		android:layout_weight="55">
+
+	        <LinearLayout 
+	    		android:layout_width="0dip"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="20">
+	    	</LinearLayout>
+	    	<LinearLayout 
+	    		android:layout_width="0dip"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="60">
+	    		<Button
+	        		android:id="@+id/logo_button"
+			        android:layout_width="fill_parent"
+			        android:layout_height="fill_parent"
+			        android:layout_alignParentTop="true"
+			        android:layout_centerHorizontal="true"
+			        android:layout_marginTop="30dp"
+			        android:background="@drawable/logo" />
+	    	</LinearLayout>
+	    	<LinearLayout 
+		    	android:layout_width="0dip"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="20">
+			</LinearLayout>
+		</LinearLayout>
     
-     <TextView
-        android:id="@+id/username_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/user_field"
-        android:layout_below="@+id/logo_button"
-        android:text="Username"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" 
-        android:layout_marginTop="10dp"/>
-    
-    <EditText
-        android:id="@+id/user_field"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username_label"
-        android:layout_centerHorizontal="true"
-	    android:layout_marginTop="0dp"
-        android:paddingBottom="10dp" >
+        <LinearLayout 
+    		android:layout_width="fill_parent"
+		    android:layout_height="0dip"
+		    android:layout_weight="45">
+	        <LinearLayout 
+	    		android:layout_width="0dip"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="20">
+	    	</LinearLayout>
+	    	<LinearLayout 
+	    		android:layout_width="0dip"
+	    		android:layout_height="fill_parent"
+	    		android:orientation="vertical"
+	    		android:layout_weight="60">
+	    		
+				<TextView
+			        android:id="@+id/username_label"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignLeft="@+id/user_field"
+			        android:layout_centerHorizontal="true"
+			        android:layout_below="@+id/logo_button"
+			        android:text="Username"
+			        android:textAppearance="?android:attr/textAppearanceMedium"
+			        android:textColor="@android:color/black" 
+			        android:layout_marginTop="10dp"/>
 
-    </EditText>
+				<EditText
+				    android:id="@+id/user_field"
+				    android:layout_width="200dp"
+				    android:layout_height="wrap_content"
+				    android:layout_marginTop="0dp"
+				    android:paddingBottom="10dp" >
 
-    <Button
-        android:id="@+id/sing_in_button"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_field"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/login" />
-
-
-
+				</EditText>
+				<LinearLayout 
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:gravity="center">
+				    <Button
+				        android:id="@+id/sing_in_button"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_below="@+id/user_field"
+				        android:layout_marginTop="5dp"
+				        android:layout_centerHorizontal="true"
+				        android:background="@drawable/login" />
+				</LinearLayout>	    	    
+	    	</LinearLayout>
+	    	<LinearLayout 
+		    	android:layout_width="0dip"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="20">
+			</LinearLayout>
+	     </LinearLayout>
+	</LinearLayout>
 </RelativeLayout>
