@@ -15,4 +15,5 @@
         android:drawable="@drawable/common_signin_btn_icon_disabled_dark" />
     <item
         android:drawable="@drawable/common_signin_btn_icon_normal_dark" />
+
 </selector>

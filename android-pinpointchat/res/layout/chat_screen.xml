@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:id = "@+id/send_recieve"
-
             >
 
         <EditText
@@ -36,15 +35,16 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_box"
+                android:hint="@string/message_hint"
                 >
         </EditText>
 
         <Button
-                android:text="send"
                 android:id="@+id/send_button"
                 android:padding="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/send"/>
 
     </LinearLayout>
 

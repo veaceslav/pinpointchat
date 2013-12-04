@@ -10,5 +10,6 @@
     <color name="common_signin_btn_light_text_disabled">#FFAAAAAA</color>
     <color name="common_signin_btn_light_text_focused">#FF737373</color>
     <color name="common_signin_btn_default_background">#FFDD4B39</color>
+    <color name="black">#FFFFFFFF</color>
     <color name="common_action_bar_splitter">#d2d2d2</color>
 </resources>
