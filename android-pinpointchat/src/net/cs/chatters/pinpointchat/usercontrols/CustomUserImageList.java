@@ -1,5 +1,12 @@
 package net.cs.chatters.pinpointchat.usercontrols;
 
+import java.util.ArrayList;
+
+import net.cs.chatters.pinpointchat.R;
+import net.cs.chatters.pinpointchat.activities.ChatActivity;
+import net.cs.chatters.pinpointchat.database.EmoticonDb;
+import net.cs.chatters.pinpointchat.models.UserData;
+import net.cs.chatters.pinpointchat.models.Utils;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,21 +18,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.cs.chatters.pinpointchat.R;
-import net.cs.chatters.pinpointchat.models.UserData;
-import net.cs.chatters.pinpointchat.activities.ChatActivity;
-import net.cs.chatters.pinpointchat.models.Utils;
 
-import java.util.ArrayList;
-
-/**
- * Created by arthur on 7/11/13.
- */
 public class CustomUserImageList extends BaseAdapter {
-
-    private static final int BITMAP_S1 = 70;
-    private static final int BITMAP_S2 = 70;
-
     public static ArrayList<UserData> usersList;
     private LayoutInflater layoutInflater;
     private Context context;
@@ -68,6 +62,12 @@ public class CustomUserImageList extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ImageHolder holder;
+        String emoticonName;
+        EmoticonDb emoticonDb = new EmoticonDb(context);
+        emoticonName = emoticonDb.getEmoticonFromNo(usersList.get(position).getName());
+        emoticonDb.close();
+
+        //Log.i("EMO DB", "Got emoticon name for " + usersList.get(position).getName() + ": emoticon: " + emoticonName);
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.list_elm_layout, null);
 
@@ -88,6 +88,25 @@ public class CustomUserImageList extends BaseAdapter {
         holder.imageView.getBackground().setColorFilter(context.getResources().getColor(R.color.culoare1 +
                                                         Math.abs(usersList.get(position).getName().hashCode())% Utils.numberOfDefinedColors),
                                                         PorterDuff.Mode.MULTIPLY);
+
+        /** Set Avatars based on emoticon data from EmoticonDb **/
+        if(emoticonName.isEmpty())
+        	holder.imageView.setImageResource(R.drawable.straightface);
+
+        if(emoticonName.equals("Smiling"))
+        	holder.imageView.setImageResource(R.drawable.smile);
+
+        if(emoticonName.equals("Tongue"))
+        	holder.imageView.setImageResource(R.drawable.tongue);
+
+        if(emoticonName.equals("Crying"))
+        	holder.imageView.setImageResource(R.drawable.cry);
+
+        if(emoticonName.equals("Happy"))
+        	holder.imageView.setImageResource(R.drawable.grin);
+
+        if(emoticonName.equals("Sad"))
+        	holder.imageView.setImageResource(R.drawable.sad);
 
         if (Utils.UnreadMessages.get(usersList.get(position).getName()) == "1") {
             holder.nameView.setTextColor(Color.RED);

@@ -1,5 +1,13 @@
 package net.cs.chatters.pinpointchat.activities;
 
+import java.util.ArrayList;
+
+import net.cs.chatters.pinpointchat.R;
+import net.cs.chatters.pinpointchat.database.EmoticonDb;
+import net.cs.chatters.pinpointchat.database.MessagesDatabase;
+import net.cs.chatters.pinpointchat.models.Message;
+import net.cs.chatters.pinpointchat.models.Utils;
+import net.cs.chatters.pinpointchat.net.Communicator;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,15 +23,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
-import net.cs.chatters.pinpointchat.database.MessagesDatabase;
-import net.cs.chatters.pinpointchat.models.Message;
-import net.cs.chatters.pinpointchat.models.Utils;
-import net.cs.chatters.pinpointchat.net.Communicator;
-import net.cs.chatters.pinpointchat.R;
-
-import java.util.ArrayList;
-
 public class ChatActivity extends Activity {
 
     String username;
@@ -34,35 +33,36 @@ public class ChatActivity extends Activity {
     ArrayAdapter<String> adapter;
     ListView listview;
     private MessagesDatabase db;
+    private EmoticonDb emoticonDb;
 
     private MessageReceiver messageReceiver;
     private IntentFilter mOnMessageFilter;
 
     private int Smiling = 0;
-    private int Laughing = 0;
+    private int Tongue = 0;
     private int Happy = 0;
     private int Sad = 0;
     private int Crying = 0;
 
     private void processEmoticons(String message){
-        Laughing += getOccurrences(message,":))") + getOccurrences(message,":-))");
+        Tongue += getOccurrences(message,":P");
         Smiling  += getOccurrences(message,":)")  + getOccurrences(message,":-)");
-        Crying   += getOccurrences(message,":((") + getOccurrences(message,":-((");
+        Crying  += getOccurrences(message,":((") + getOccurrences(message,":-((");
         Happy    += getOccurrences(message,":D")  + getOccurrences(message,":-D");
         Sad      += getOccurrences(message,":(")  + getOccurrences(message,":-(");
     }
 
     private int getOccurrences(String message, String s){
 
+        int index= 0;
         int occurrences = 0;
-
         while (true){
-            int i = message.indexOf(s);
+            int i = message.indexOf(s, index);
             if(i == -1)
                 break;
             occurrences++;
+            index = i+1;
         }
-
         return occurrences;
     }
 
@@ -101,6 +101,7 @@ public class ChatActivity extends Activity {
             Message msg = messagesInDB.get(i);
             String message = String.format("%s %s: %s", msg.getHourMin(), msg.getSender(), msg.getContent());
             messages.add(message);
+            processEmoticons(msg.getContent());
             adapter.notifyDataSetChanged();
             scrollDown();
         }
@@ -184,6 +185,44 @@ public class ChatActivity extends Activity {
         unregisterReceiver(messageReceiver);
     }
 
+    public void onBackPressed(){
+    	int max = 0;
+    	String emMax = new String();
+    	if(Smiling > max)
+    	{
+    		max = Smiling;
+    		emMax= "Smiling";
+    	}
+
+    	if(Tongue > max)
+    	{
+    		max = Tongue;
+    		emMax = "Tongue";
+    	}
+    	if(Happy > max)
+    	{
+    		max = Happy;
+    		emMax = "Happy";
+    	}
+
+    	if(Sad > max)
+    	{
+    		max = Sad;
+    		emMax = "Sad";
+    	}
+    	if(Crying > max)
+    	{
+    		max = Crying;
+    		emMax = "Crying";
+    	}
+
+        emoticonDb = new EmoticonDb(getApplicationContext());
+        emoticonDb.addUser(interlocutor, emMax);
+        emoticonDb.close();
+
+        Log.i("Emo DB", "Setting emoticon" + emMax + " for " + interlocutor);
+        finish();
+    }
     public class MessageReceiver extends BroadcastReceiver{
 
         @Override

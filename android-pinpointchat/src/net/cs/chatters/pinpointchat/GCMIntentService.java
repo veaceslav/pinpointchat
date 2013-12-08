@@ -80,6 +80,10 @@ public class GCMIntentService extends GCMBaseIntentService{
             Log.i("GCM prev received", ""+Utils.messageNoReceivedFromUser.get(msg.getSender()));
             Log.i("GCM received number", ""+msg.msgNo);
 
+            /**
+             * TODO: slavik: I'm not sure about this fix, I think it blocks some messages and
+             * 			notifications
+             */
             if(Utils.messageNoReceivedFromUser.get(msg.getSender()) == null)
             	continue;
 
