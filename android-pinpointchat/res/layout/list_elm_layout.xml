@@ -5,42 +5,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF">
-    <ImageView
+	
+    <LinearLayout 
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
+        <ImageView
             android:layout_height="70dp"
             android:layout_width ="70dp"
             android:id="@+id/imageView"
             android:background="@drawable/personal_color_shape"
             />
-
-    <TextView
-            android:layout_height="wrap_content"
-            android:layout_width ="wrap_content"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toLeftOf="@+id/notification"
-            android:id="@+id/nameView"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:onClick="Selected"
-            />
-    <ImageView
-            android:id="@+id/notification"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/notification"
-            android:layout_height="70dp"
-            android:layout_width ="60dp"
-            />
-    <TextView
-            android:id="@+id/distanceView"
-            android:layout_height="wrap_content"
-            android:layout_width ="wrap_content"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toLeftOf="@+id/notification"
-            android:layout_below ="@id/nameView"
-            android:textColor="#B8B8B8"
-            android:textSize="12sp"
-            android:layout_alignBaseline="@id/imageView"
-            android:gravity="center"
-            android:typeface="monospace"
-            />
-
+    
+		<LinearLayout 
+	 				android:layout_width="wrap_content"
+	 				android:layout_height="wrap_content"
+	 				android:orientation="vertical"
+	 				android:layout_toRightOf="@+id/imageView">
+		    <TextView
+		            android:layout_height="wrap_content"
+		            android:layout_width ="wrap_content"
+		            android:id="@+id/nameView"
+		            android:textSize="24sp"
+		            android:layout_marginLeft="10dp"
+		            android:textStyle="bold"
+		            android:onClick="Selected"
+		            />
+		    
+		    <TextView
+		            android:id="@+id/distanceView"
+		            android:layout_height="wrap_content"
+		            android:layout_width ="wrap_content"
+		            android:textColor="@color/red"
+		            android:textSize="16sp"
+		            android:layout_marginLeft="10dp"
+		            android:gravity="center"
+		            android:typeface="monospace"
+		            />
+	    </LinearLayout>
+	    
+	    <ImageView
+	            android:id="@+id/notification"
+	            android:layout_alignParentRight="true"
+	            android:src="@drawable/notification"
+	            android:layout_height="70dp"
+	            android:layout_width ="60dp"
+	            />  	
+	        
+    </LinearLayout>
+    
 </RelativeLayout>

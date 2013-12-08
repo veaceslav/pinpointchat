@@ -6,13 +6,49 @@
               android:layout_height="match_parent"
               android:background="#FFFFFF">
 
-    <ListView
-            android:id="@+id/listView"
-            android:layout_height="wrap_content"
-            android:layout_width ="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:drawSelectorOnTop="true"
-            />
-
-
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Start a conversation with:"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp" 
+        android:textStyle="bold"
+        android:textColor="@android:color/darker_gray"/>
+    
+   	<LinearLayout 
+  			android:layout_width="fill_parent"
+  			android:layout_height="fill_parent">
+  		
+	<LinearLayout 
+   			android:layout_width="0dip"
+   			android:layout_height="fill_parent"
+   			android:layout_weight="10"
+   			/>
+   	
+	<LinearLayout 
+   			android:layout_width="0dip"
+   			android:layout_height="fill_parent"
+   			android:layout_weight="80">
+	    <ListView
+	            android:id="@+id/listView"
+	            android:layout_height="wrap_content"
+	            android:layout_width ="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:drawSelectorOnTop="true"
+	            android:divider="#CCCCCC"
+	            android:headerDividersEnabled="true"
+	            android:footerDividersEnabled="true"
+	            android:dividerHeight="2dp"
+	            android:scrollbars="none"
+	            />
+	</LinearLayout>
+	<LinearLayout 
+   			android:layout_width="0dip"
+   			android:layout_height="fill_parent"
+   			android:layout_weight="10"
+   			/>
+	</LinearLayout>
 </LinearLayout>
