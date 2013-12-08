@@ -83,6 +83,16 @@ public class UsersListActivity extends Activity {
         	userPositionUpdater.cancel(true);
     }
 
+    public void onBackPressed(){
+        communicator.delete_user(Utils.username);
+
+        userPositionUpdater.cancel(true);
+
+        clearPreferences();
+
+        finish();
+    }
+
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater menuInflater = getMenuInflater();
