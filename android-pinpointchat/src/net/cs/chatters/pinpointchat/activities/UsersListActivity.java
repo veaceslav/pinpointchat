@@ -88,7 +88,8 @@ public class UsersListActivity extends Activity {
 
         userPositionUpdater.cancel(true);
 
-        clearPreferences();
+        //don't clear preferences, allow the user to reconnect with the same username (Daniela)
+        //clearPreferences();
 
         finish();
     }

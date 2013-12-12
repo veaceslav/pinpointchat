@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 
+import net.cs.chatters.pinpointchat.R;
 import net.cs.chatters.pinpointchat.models.Utils;
 import net.cs.chatters.pinpointchat.net.Communicator;
 
@@ -23,6 +24,7 @@ public class LaunchScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.launch_screen);
 
         //instantiate variables from Utils
         Utils.UnreadMessages = new HashMap<String, String>();
@@ -33,19 +35,20 @@ public class LaunchScreenActivity extends Activity {
 
         //in case of no internet connectivity the user will be prompted to close the app
         //and check the network status
-        checkIfOnline();
+        boolean online = checkIfOnline();
 
         //check if logged in
         SharedPreferences mSharedPreferences = getApplicationContext().
                 getSharedPreferences(Utils.SharedPrefs, 0);
 
-        SharedPreferences.Editor e = mSharedPreferences.edit();
-        e.clear();
-        e.commit();
+        //TODO: comment in order to skip the login screen (Daniela)
+//        SharedPreferences.Editor e = mSharedPreferences.edit();
+//        e.clear();
+//        e.commit();
 
         boolean logged_in = mSharedPreferences.getBoolean(Utils.LOGGED_IN, false);
 
-        if(logged_in){
+        if(logged_in & online){
             //get username
             Utils.username = mSharedPreferences.getString(Utils.USERNAME, "");
 
@@ -56,13 +59,14 @@ public class LaunchScreenActivity extends Activity {
             //starting UserListActivity
             Intent intent = new Intent(this, UsersListActivity.class);
             startActivity(intent);
-        }else{
+            finish();
+        }else if (online){
             //starting MainActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
-        finish();
     }
 
 
@@ -81,13 +85,6 @@ public class LaunchScreenActivity extends Activity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
                 finish();
-            }
-        });
-
-        alertBuilder.setNegativeButton("Try again", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                    checkIfOnline();
             }
         });
 

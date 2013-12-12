@@ -190,9 +190,7 @@ public class Communicator {
             if(Utils.regid.equalsIgnoreCase("")){
                 return MainActivity.INTERNAL_PROBLEM;
             }
-            Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
             result = (new UserSubscriber().execute(username, Utils.regid)).get();
-            threadSet = Thread.getAllStackTraces().keySet();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

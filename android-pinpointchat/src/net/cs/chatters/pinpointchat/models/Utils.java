@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 public class Utils {
 
-    public final static String USERNAME = "net.mready.chatty.USERNAME";
-    public final static String ACTION_NEW_MESSAGE = "net.mready.chatty.NEW_MESSAGE";
-    public static final String ServerURL = "http://10.42.0.1:8080";
+    public final static String USERNAME = "pinpointchat.USERNAME";
+    public final static String ACTION_NEW_MESSAGE = "pinpointchat.NEW_MESSAGE";
+    public static final String ServerURL = "http://10.10.0.126:8080";
     public final static String SENDER_ID = "520086472451";
-    public final static String LOGGED_IN = "net.mready.chatty. LOGGED_IN";
-    public final static String INTERLOCUTOR = "net.mready.chatty.INTERLOCUTOR";
-    public final static String SharedPrefs = "net.mready.chatty.SHARED_PREFS";
+    public final static String LOGGED_IN = "pinpointchat.LOGGED_IN";
+    public final static String INTERLOCUTOR = "pinpointchat.INTERLOCUTOR";
+    public final static String SharedPrefs = "pinpointchaty.SHARED_PREFS";
     public static final int OK = 200;
     public static final int numberOfDefinedColors = 5;
     public static final int userPositionUpdaterDELAY = 1;//1000 * 60 * 5;// 1000 * 60 * numarul de minute // VictorP
